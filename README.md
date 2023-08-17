@@ -30,20 +30,24 @@ For the 10% of cases, we support dependendency injection into the layer.
 5. Allow Reaktor Module registration from Kotlin
 6. Automatic JSI Bindings
 7. Platform specific Invoker with common interface, support a new invoker -> support a new platform
+8. Compression / Network / Database / KeyValueStore abstractions
 
 # Version 2
 1. Allow arbitary serializable class support using FlatBuffers.
-2. Build Binary Channel based on Flow<ByteBuffer>
-3. Decoupled Invoker (KMM <> CPP, CPP <> JSI, CPP <> BinaryChannel). Currently the Invoker directly uses JSI types
-4. Support Flutter (BinaryChannels)
-5. Compiler plugin based code generation (TypeScript / Dart)
-6. Crashlytics and Logging across points
-7. Flipper plugin to see function calls and timings
-8. Safer memory management
-9. Easy interop with arbitary C++ code (using the invoker)
-10. C++ and Kotlin unit tests
-11. Tester app integration tests
-12. Performance benchmarking tests
+2. Automatic FlatBuffer schema generation
+3. Build Binary Channel based on Flow<ByteBuffer>
+4. Decoupled Invoker (KMM <> CPP, CPP <> JSI, CPP <> BinaryChannel). Currently the Invoker directly uses JSI types
+5. Support Flutter (BinaryChannels)
+6. Compiler plugin based code generation (TypeScript / Dart)
+7. Crashlytics and Logging across points
+8. Flipper plugin to see function calls and timings
+9. Safer memory management
+10. Easy interop with arbitary C++ code (using the invoker)
+11. C++ and Kotlin unit tests
+12. Tester app integration tests
+13. Performance benchmarking tests
+14. Access a subset of React Native APIs from Kotlin/Native
+    
 
 # Articles ( lot more to come )
 1. https://medium.com/@shibasis-patnaik/reaktor-kotlin-multiplatform-meets-react-native-jsi-a96e9d7305ec
