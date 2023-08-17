@@ -35,3 +35,6 @@ For the 10% of cases, we support dependendency injection into the layer.
 6. Flipper plugin to see function calls and timings
 7. Safer memory management
 8. Easy interop with arbitary C++ code (using the invoker)
+9. C++ and Kotlin unit tests
+10. Tester app integration tests
+11. Performance benchmarking tests
