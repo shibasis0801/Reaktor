@@ -36,9 +36,8 @@ For the 10% of cases, we support dependendency injection into the layer.
 1. Allow arbitary serializable class support using FlatBuffers.
 2. Automatic FlatBuffer schema generation
 3. Build Binary Channel based on Flow<ByteBuffer>
-4. Decoupled Invoker (KMM <> CPP, CPP <> JSI, CPP <> BinaryChannel). Currently the Invoker directly uses JSI types
-5. Support Flutter (BinaryChannels)
-6. Compiler plugin based code generation (TypeScript / Dart)
+4. Decoupled Invoker (KMM <> CPP, CPP <> JSI). Currently the Invoker directly uses JSI types
+6. Compiler plugin based code generation to TypeScript
 7. Crashlytics and Logging across points
 8. Flipper plugin to see function calls and timings
 9. Safer memory management
@@ -47,6 +46,10 @@ For the 10% of cases, we support dependendency injection into the layer.
 12. Tester app integration tests
 13. Performance benchmarking tests
 14. Access a subset of React Native APIs from Kotlin/Native
+
+# Version 3
+1. Support Flutter (BinaryChannels)
+2. Compiler plugin based code generation to Dart
     
 
 # Articles ( lot more to come )
