@@ -1,5 +1,10 @@
 # reaktor
 Kotlin Multiplatform Framework with bi-directional type safe communications to React and C++
+Do you write code in C when you build a new app ? Why ? 
+Humans build abstractions because we can build bigger things on top of them. 
+This project aims to elevate your programming toolkit to work with powerful abstractions in Kotlin. 
+But I believe abstractions should never prevent you from doing something new or unanticipated. 
+So it also lets you drop down to pure native code and plug them in
 
 # Usage
 1. React Native Applications - Easy to write high performance native modules
@@ -16,7 +21,6 @@ As our apps are mostly in React Native, I also want seamless access to this fram
 
 Kotlin and C++ both are cross platform languages and a combination of both should serve 90% of cases. 
 For the 10% of cases, we support dependendency injection into the layer.
-
 
 # Version 1
 1. Single Native Module for React Native across Platforms (Reaktor Module)
@@ -38,3 +42,6 @@ For the 10% of cases, we support dependendency injection into the layer.
 9. C++ and Kotlin unit tests
 10. Tester app integration tests
 11. Performance benchmarking tests
+
+# Articles ( lot more to come )
+1. https://medium.com/@shibasis-patnaik/reaktor-kotlin-multiplatform-meets-react-native-jsi-a96e9d7305ec
