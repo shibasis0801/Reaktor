@@ -25,23 +25,25 @@ For the 10% of cases, we support dependendency injection into the layer.
 # Version 1
 1. Single Native Module for React Native across Platforms (Reaktor Module)
 2. Richer Type Support than Turbo Modules (allow normal arrays, hashmaps and kotlin flows)
-3. Allow C++ Native Modules for pure C++ implementations
-4. Allow Reaktor Module registration from Kotlin
-5. Automatic JSI Bindings
-6. Platform specific Invoker with common interface, support a new invoker -> support a new platform
+3. Expose kotlin flows to c++ and JS
+4. Allow C++ Native Modules for pure C++ implementations
+5. Allow Reaktor Module registration from Kotlin
+6. Automatic JSI Bindings
+7. Platform specific Invoker with common interface, support a new invoker -> support a new platform
 
 # Version 2
 1. Allow arbitary serializable class support using FlatBuffers.
-2. Decoupled Invoker (KMM <> CPP, CPP <> JSI). Currently the Invoker directly uses JSI types
-3. Support Flutter
-4. Compiler plugin based code generation (TypeScript / Dart)
-5. Crashlytics and Logging across points
-6. Flipper plugin to see function calls and timings
-7. Safer memory management
-8. Easy interop with arbitary C++ code (using the invoker)
-9. C++ and Kotlin unit tests
-10. Tester app integration tests
-11. Performance benchmarking tests
+2. Build Binary Channel based on Flow<ByteBuffer>
+3. Decoupled Invoker (KMM <> CPP, CPP <> JSI, CPP <> BinaryChannel). Currently the Invoker directly uses JSI types
+4. Support Flutter (BinaryChannels)
+5. Compiler plugin based code generation (TypeScript / Dart)
+6. Crashlytics and Logging across points
+7. Flipper plugin to see function calls and timings
+8. Safer memory management
+9. Easy interop with arbitary C++ code (using the invoker)
+10. C++ and Kotlin unit tests
+11. Tester app integration tests
+12. Performance benchmarking tests
 
 # Articles ( lot more to come )
 1. https://medium.com/@shibasis-patnaik/reaktor-kotlin-multiplatform-meets-react-native-jsi-a96e9d7305ec
