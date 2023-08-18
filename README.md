@@ -30,7 +30,8 @@ For the 10% of cases, we support dependendency injection into the layer.
 5. Allow Reaktor Module registration from Kotlin
 6. Automatic JSI Bindings
 7. Platform specific Invoker with common interface, support a new invoker -> support a new platform
-8. Compression / Network / Database / KeyValueStore abstractions
+8. Expose Compression / Network / Database / KeyValueStore abstractions (similar to DAPR)
+
 
 # Version 2
 1. Allow arbitary serializable class support using FlatBuffers.
@@ -46,6 +47,7 @@ For the 10% of cases, we support dependendency injection into the layer.
 12. Tester app integration tests
 13. Performance benchmarking tests
 14. Access a subset of React Native APIs from Kotlin/Native
+15. Allow common interface dependency injection from swift or typescript
 
 # Version 3
 1. Support Flutter (BinaryChannels)
