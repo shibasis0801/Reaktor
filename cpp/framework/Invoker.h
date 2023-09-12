@@ -2,9 +2,6 @@
 #include <framework/Base.h>
 
 namespace Reaktor {
-    /**
-     *
-     */
     struct PlatformInvoker {
         virtual jsi::Value operator()(
                 const char *name,

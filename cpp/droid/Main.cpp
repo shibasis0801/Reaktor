@@ -35,15 +35,6 @@ struct JReaktor: public jni::JavaClass<JReaktor> {
         Reaktor::addModule(instance, name.toStdString());
     }
 
-//    static void addModule(
-//            jni::alias_ref<JReaktor> _,
-//            const jni::alias_ref<ReaktorModule>& instance,
-//            jni::JString name,
-//            const Reaktor::JHashMap<jstring, jstring> descriptors
-//    ) {
-//
-//    }
-
     static void registerNatives() {
         javaClassStatic()->registerNatives({
              makeNativeMethod("install", JReaktor::install),

@@ -21,7 +21,7 @@ Pod::Spec.new do |spec|
     spec.pod_target_xcconfig = {
         'OTHER_LDFLAGS' => '-l"stdc++"',
         "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_TARGET_SRCROOT)\" \"$(PODS_ROOT)/RCT-Folly\" \"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/boost-for-react-native\" \"$(PODS_ROOT)/DoubleConversion\" \"$(PODS_ROOT)/Headers/Private/React-Core\" ",
-        "CLANG_CXX_LANGUAGE_STANDARD" => "c++17",
+        "CLANG_CXX_LANGUAGE_STANDARD" => "c++20",
         "CLANG_CXX_LIBRARY" => "libc++"
     }
 

@@ -9,6 +9,7 @@ plugins {
     id("org.jetbrains.compose")
 }
 
+val cppRoot = "../cpp"
 kotlin {
     val (commonMain, commonTest) = common {
         dependencies = {
@@ -40,10 +41,18 @@ kotlin {
                 isStatic = true
             }
         }
+        cinterops = {
+            val reaktor by creating {
+                defFile(file("$cppRoot/reaktor.def"))
+                headers("$cppRoot/Reaktor.h")
+                extraOpts("-Xsource-compiler-option", "-std=c++20")
+                extraOpts("-Xcompile-source", "$cppRoot/Reaktor.cpp")
+            }
+        }
     }
     web(commonMain)
 }
 
 android {
-    defaults("app.mehmaan.mobile", file("../cpp/CMakeLists.txt"))
+    defaults("app.mehmaan.mobile", file("$cppRoot/CMakeLists.txt"))
 }

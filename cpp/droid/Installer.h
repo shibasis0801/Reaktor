@@ -1,6 +1,6 @@
 #pragma once
 #include <droid/AndroidBase.h>
-#include <droid/Invoker.h>
+#include <droid/AndroidInvoker.h>
 #include <modules/NetworkModule.h>
 #include <droid/bindings/Functions.h>
 #include <modules/MehmaanConfig.h>

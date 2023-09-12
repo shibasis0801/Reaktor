@@ -1,27 +1,7 @@
-#include <droid/Invoker.h>
-#include <framework/PlatformConverter.h>
+#include <droid/AndroidInvoker.h>
+#include <framework/Converter.h>
 
 namespace Reaktor {
-    struct AndroidConverter: public PlatformConverter<jni::alias_ref<jobject>> {
-        inline NativeType<jni::alias_ref<jobject>>
-        toObject(const jni::alias_ref<jobject> &data) const override {
-            return {};
-        }
-
-        inline jni::alias_ref<jobject>
-        fromObject(const NativeType<jni::alias_ref<jobject>> &data) const override {
-            return {};
-        }
-
-        inline PrimitiveType toPrimitive(const jni::alias_ref<jobject> &data) const override {
-            return {};
-        }
-
-        inline jni::alias_ref<jobject> fromPrimitive(const PrimitiveType &data) const override {
-            return {};
-        }
-    };
-
     struct KeepAlive {
         static long StoreJavaGlobal(const jobject &obj) {
             std::lock_guard guard(javaObjectsLock);
@@ -294,34 +274,4 @@ namespace Reaktor {
 
         return jsFlow;
     }
-
-//    template<class From, class To>
-//    struct Converter {
-//        virtual To test(From data) = 0;
-//    };
-//
-//    struct IntConverter: Converter<int, double> {
-//        double test(int data) override {
-//            return Converter::test(data);
-//        }
-//    };
-//
-//    struct DoubleConverter: Converter<double, int> {
-//        int test(double data) override {
-//            return 0;
-//        }
-//    };
-//
-//    template<class From, class To>
-//    decltype(auto) fn(Converter<From, To> &converter, From data) {
-//        return converter.test(data);
-//    }
-//
-//    void test() {
-//        std::variant<int, double> x = 1;
-//        DoubleConverter droid;
-//        IntConverter darwin;
-//        auto x1 = fn(droid, 1.0);
-//        fn(darwin, 2);
-//    }
 }

@@ -7,6 +7,7 @@ expect class FlowHandle(
     flow: Flow<Any>
 ) {
     fun stop()
+    fun sum(): Int
 }
 
 fun nativeFlow(fn: suspend FlowCollector<Any>.() -> Unit) = FlowHandle(flow(fn))

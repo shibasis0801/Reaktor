@@ -1,8 +1,9 @@
 #pragma once
 #include <Base.h>
 #include <types/Types.h>
-#include <framework/PlatformConverter.h>
-#include <framework/PlatformInvoker.h>
+#include <framework/Converter.h>
+#include <framework/Invoker.h>
+#include <Reaktor.h>
 
 namespace Reaktor {
     /*

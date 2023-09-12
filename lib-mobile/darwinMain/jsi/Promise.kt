@@ -29,3 +29,4 @@ actual class Promise actual constructor(val executor: suspend Promise.() -> Unit
         nativeRejecter?.invoke(error)
     }
 }
+

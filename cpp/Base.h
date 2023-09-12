@@ -53,7 +53,6 @@ namespace Reaktor {
 
 
     class Link {
-        // Not shared_ptr because we don't want a leak. If it becomes null elsewhere, this file becomes no-op
         // Maybe weak_ptr
         jsi::Runtime *runtime;
 

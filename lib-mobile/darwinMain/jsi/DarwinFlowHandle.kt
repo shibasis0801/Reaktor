@@ -22,4 +22,6 @@ actual class FlowHandle actual constructor(
     actual fun stop() {
         flowJob.cancel()
     }
+
+    actual fun sum() = 0
 }

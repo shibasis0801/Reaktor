@@ -26,7 +26,7 @@ include_directories(
         ${REACT_NATIVE}/ReactCommon/yoga
         ${REACT_NATIVE}/ReactAndroid/src/main/jni/react/turbomodule
         ${REACT_NATIVE}/ReactAndroid/src/main/jni/react/turbomodule/ReactCommon
-        ../../modules/core/commonMain
+        .
 )
 
 add_compile_options(-Wall -Werror -fexceptions -frtti -fPIC)
