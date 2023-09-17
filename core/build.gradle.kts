@@ -75,5 +75,5 @@ kotlin {
 }
 
 android {
-    defaults("app.mehmaan.core")
+    defaults("dev.reaktor.core")
 }

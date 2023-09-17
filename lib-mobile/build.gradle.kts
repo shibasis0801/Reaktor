@@ -54,5 +54,5 @@ kotlin {
 }
 
 android {
-    defaults("app.mehmaan.mobile", file("$cppRoot/CMakeLists.txt"))
+    defaults("dev.reaktor.mobile", file("$cppRoot/CMakeLists.txt"))
 }

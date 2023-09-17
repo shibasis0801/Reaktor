@@ -37,5 +37,5 @@ kotlin {
 }
 
 android {
-    defaults("dev.reaktor.design")
+    defaults("dev.reaktor.jsi")
 }
