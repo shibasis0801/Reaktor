@@ -2,16 +2,30 @@
 package app.mehmaan.core.extensions
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION
 import android.content.pm.PackageManager
 import android.widget.Toast
 import androidx.activity.ComponentActivity
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContract
+import androidx.annotation.NonNull
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.coroutineScope
 import app.mehmaan.core.framework.BaseActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.tasks.Task
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.suspendCancellableCoroutine
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
 import kotlin.math.min
 
 fun ComponentActivity.getSimpleName() : String {
@@ -35,6 +49,32 @@ inline fun <reified T : Activity> ComponentActivity.startActivity(disableAnimati
         if (disableAnimation)
             addFlags(FLAG_ACTIVITY_NO_ANIMATION)
     })
+}
+
+private val resultId = AtomicInteger(0)
+sealed class ActivityResultError: Error() {
+    data object Cancelled : ActivityResultError()
+    data object IllegalState : ActivityResultError()
+}
+suspend fun<Input, Output> ComponentActivity.getResultFromActivity(
+    contract: ActivityResultContract<Input, Output>,
+    input: Input
+) = suspendCancellableCoroutine<Output> { continuation ->
+    if (!lifecycle.currentState.isAtLeast(Lifecycle.State.CREATED)) {
+        continuation.resumeWithException(ActivityResultError.IllegalState)
+        return@suspendCancellableCoroutine
+    }
+    val id = resultId.getAndIncrement().toString()
+    var launcher: ActivityResultLauncher<Input>? = null
+    launcher = activityResultRegistry.register(id, contract) {
+        continuation.resume(it)
+        launcher?.unregister()
+    }
+    continuation.invokeOnCancellation {
+        continuation.resumeWithException(ActivityResultError.Cancelled)
+        launcher.unregister()
+    }
+    launcher.launch(input)
 }
 
 inline fun <reified T : Activity> ComponentActivity.finishAndStart() {

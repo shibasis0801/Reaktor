@@ -18,7 +18,7 @@ abstract class AndroidAdapter<ConcreteAdapter: AndroidAdapter<ConcreteAdapter>>(
 ): Adapter<BaseActivity, ConcreteAdapter>(activity), AndroidComponent {
     override val ref = WeakRef(activity)
     val activity
-        get() = ref.get()!!
+        get() = ref.get()
 
     val scope = CoroutineScope(Dispatchers.Main)
 
