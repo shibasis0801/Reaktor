@@ -1,7 +1,9 @@
 package app.mehmaan.core.network
 
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import dev.reaktor.core.annotations.reaktor.Expose
 
 // Move to common
 enum class StatusCode(val code: Int) {
@@ -11,6 +13,8 @@ enum class StatusCode(val code: Int) {
     ERROR_SERVER(500)
 }
 
+@Expose
+@Serializable
 data class Response(
     val jsonData: String,
     val statusCode: StatusCode = StatusCode.SUCCESS

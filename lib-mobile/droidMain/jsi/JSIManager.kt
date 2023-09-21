@@ -12,9 +12,11 @@ import com.facebook.react.module.annotations.ReactModule
 import com.facebook.react.turbomodule.core.CallInvokerHolderImpl
 import com.facebook.react.uimanager.ReactShadowNode
 import com.facebook.react.uimanager.ViewManager
+import dev.reaktor.core.annotations.reaktor.Expose
 
 const val JSI_MANAGER = "JSIManager"
 
+@Expose
 class NetworkModule(): ReaktorModule {
     override val name = "NetworkModule"
     fun get() = nativeFlow {

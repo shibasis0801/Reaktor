@@ -9,6 +9,7 @@ plugins {
     id("com.android.library")
     id("dev.shibasis.dependeasy.plugin")
     id("com.google.firebase.crashlytics")
+    id("com.google.devtools.ksp")
 }
 
 kotlin {
@@ -18,7 +19,6 @@ kotlin {
             commonCoroutines()
             commonSerialization()
             commonKoin()
-//            implementation("com.squareup.okio:okio:3.5.0")
         }
 
         testDependencies = {
@@ -76,4 +76,9 @@ kotlin {
 
 android {
     defaults("dev.reaktor.core")
+}
+
+dependencies {
+    add("kspCommonMainMetadata", project(":generator"))
+//    add("kspJvm", project(":generator"))
 }

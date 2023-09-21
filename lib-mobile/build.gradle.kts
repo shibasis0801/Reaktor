@@ -7,6 +7,7 @@ plugins {
     id("com.android.library")
     id("dev.shibasis.dependeasy.plugin")
     id("org.jetbrains.compose")
+    id("com.google.devtools.ksp")
 }
 
 val cppRoot = "../cpp"
@@ -55,4 +56,12 @@ kotlin {
 
 android {
     defaults("dev.reaktor.mobile", file("$cppRoot/CMakeLists.txt"))
+}
+
+
+dependencies {
+    configurations.forEach { conf ->
+        if (conf.name.startsWith("ksp"))
+            add(conf.name, project(":generator"))
+    }
 }
