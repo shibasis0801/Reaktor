@@ -60,8 +60,8 @@ android {
 
 
 dependencies {
-    configurations.forEach { conf ->
-        if (conf.name.startsWith("ksp"))
-            add(conf.name, project(":generator"))
-    }
+//    configurations.forEach { conf ->
+//        if (conf.name.startsWith("ksp"))
+//            add(conf.name, project(":generator"))
+//    }
 }
