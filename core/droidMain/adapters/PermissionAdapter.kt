@@ -1,44 +1,38 @@
 package app.mehmaan.core.adapters
 
+import android.Manifest
+import android.app.Application
+import androidx.activity.ComponentActivity
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import app.mehmaan.core.extensions.getResultFromActivity
 import app.mehmaan.core.extensions.hasPermission
-import app.mehmaan.core.framework.AndroidAdapter
+import app.mehmaan.core.framework.Adapter
 import app.mehmaan.core.framework.BaseActivity
+import app.mehmaan.core.framework.WeakRef
 import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.resume
 
-class PermissionAdapter(activity: BaseActivity): AndroidAdapter<PermissionAdapter>(activity) {
-    private var requestId = AtomicInteger(0)
-    private fun nextId() = "Permission#${requestId.getAndIncrement()}"
+class AndroidPermissionAdapter(
+    activity: ComponentActivity
+): PermissionAdapter<ComponentActivity>(activity) {
 
-    private val launchers = arrayListOf<ActivityResultLauncher<*>>()
-
-    suspend fun request(vararg permissions: String) = invokeSuspend {
-        suspendCancellableCoroutine { continuation ->
-            if (permissions.all(::hasPermission)) {
-                continuation.resume(true)
-                return@suspendCancellableCoroutine
-            }
-
-            val launcher = activityResultRegistry.register(nextId(), ActivityResultContracts.RequestMultiplePermissions()) {
-                val allGranted = it.all { it.value }
-                if (allGranted) {
-                    continuation.resume(true)
-                } else {
-                    continuation.resume(false)
-                }
-            }
-            launcher.launch(arrayOf(*permissions))
-            launchers.add(launcher)
+    fun check(permission: String) = invoke {
+        val actualPermissions = when(permission) {
+            Permission.CAMERA -> listOf(Manifest.permission.CAMERA)
+            else -> listOf(permission)
         }
+
+        actualPermissions.all { hasPermission(it) }
     } ?: false
 
-    override fun onDestroy(activity: BaseActivity) {
-        launchers.forEach {
-            it.unregister()
+    override suspend fun request(vararg permissions: String): Boolean {
+        val activity = ref.get() ?: return false
+        if (permissions.all(::check)) {
+            return true
         }
-        launchers.clear()
+        val result = activity.getResultFromActivity(ActivityResultContracts.RequestMultiplePermissions(), arrayOf(*permissions))
+        return result.all { it.value }
     }
 }

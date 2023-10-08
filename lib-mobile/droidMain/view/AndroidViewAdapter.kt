@@ -17,7 +17,7 @@ abstract class AndroidViewAdapter(
         ComposeView(this).apply {
             setContent {
                 MehmaanTheme {
-                    render()
+                    Render()
                 }
             }
         }

@@ -10,6 +10,7 @@ plugins {
     id("dev.shibasis.dependeasy.plugin")
     id("com.google.firebase.crashlytics")
     id("com.google.devtools.ksp")
+    id("app.cash.sqldelight")
 }
 
 kotlin {
@@ -19,6 +20,7 @@ kotlin {
             commonCoroutines()
             commonSerialization()
             commonKoin()
+            api("org.jetbrains.kotlinx:kotlinx-io-core:0.3.0")
         }
 
         testDependencies = {
@@ -28,6 +30,9 @@ kotlin {
 
     web(commonMain) {
         dependencies = {
+            implementation("app.cash.sqldelight:web-worker-driver:2.0.0")
+            implementation(npm("sql.js", "1.6.2"))
+            implementation(devNpm("copy-webpack-plugin", "9.1.0"))
             webBasic()
             react()
             webNetworking()
@@ -41,6 +46,7 @@ kotlin {
 
         }
         dependencies = {
+            implementation("app.cash.sqldelight:android-driver:2.0.0")
             basic()
 //                flipper()
             androidCompose(project)
@@ -53,12 +59,12 @@ kotlin {
             camera()
             firebase(project)
             machineLearning()
-            drive()
         }
     }
 
     darwin(commonMain) {
         dependencies = {
+            implementation("app.cash.sqldelight:native-driver:2.0.0")
             implementation("io.ktor:ktor-client-darwin:${Version.Ktor}")
         }
     }
@@ -67,6 +73,7 @@ kotlin {
             jvmToolchain(11)
         }
         dependencies = {
+            implementation("app.cash.sqldelight:sqlite-driver:2.0.0")
             vertx()
             serverNetworking()
             implementation("com.google.firebase:firebase-admin:9.2.0")
@@ -81,4 +88,12 @@ android {
 dependencies {
     add("kspCommonMainMetadata", project(":generator"))
 //    add("kspJvm", project(":generator"))
+}
+
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("dev.reaktor.core")
+        }
+    }
 }

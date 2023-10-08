@@ -11,7 +11,7 @@ import java.util.*
 /**
  * Android Storage APIs are very complicated now, create abstraction using this.
  */
-class StorageAdapter(activity: BaseActivity): AndroidAdapter<StorageAdapter>(activity) {
+class StorageAdapter(activity: BaseActivity): AndroidAdapter(activity) {
     private val FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
 
     // Android/media/package_name/directory

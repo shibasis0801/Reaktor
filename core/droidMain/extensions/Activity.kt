@@ -57,6 +57,8 @@ sealed class ActivityResultError: Error() {
     data object Cancelled : ActivityResultError()
     data object IllegalState : ActivityResultError()
 }
+
+// Todo Improve further
 suspend fun<Input, Output> ComponentActivity.getResultFromActivity(
     contract: ActivityResultContract<Input, Output>,
     input: Input
@@ -74,6 +76,7 @@ suspend fun<Input, Output> ComponentActivity.getResultFromActivity(
     continuation.invokeOnCancellation {
         continuation.resumeWithException(ActivityResultError.Cancelled)
         launcher.unregister()
+        // also unregister onDestroy, check leaks
     }
     launcher.launch(input)
 }

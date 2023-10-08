@@ -5,5 +5,5 @@ import app.mehmaan.core.framework.AdapterContract
 
 interface ViewAdapter<Controller: Any>: AdapterContract<Controller, ViewAdapter<Controller>> {
     @Composable
-    abstract fun render()
+    abstract fun Render()
 }

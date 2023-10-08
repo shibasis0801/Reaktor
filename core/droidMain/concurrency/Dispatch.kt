@@ -12,8 +12,9 @@ object Dispatch {
     val MainExecutor = Main.asExecutor()
 
     suspend fun<Result> onMain(fn: suspend () -> Result) = scope.async(Main) { fn() }
-
+    fun<Result> main(fn: suspend () -> Result) = scope.async(Main) { fn() }
     suspend fun<Result> inBackground(fn: suspend () -> Result) = scope.async(Background) { fn() }
+    fun<Result> background(fn: suspend () -> Result) = scope.async(Background) { fn() }
 
     fun cancel() = scope.cancel()
 }

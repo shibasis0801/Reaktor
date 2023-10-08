@@ -6,7 +6,7 @@ import org.koin.dsl.module
 // Probably use this in future
 // https://github.com/JetBrains-Research/reflekt
 
-val adapterModule = module {
+val AdapterModule = module {
     single { StorageAdapter(get()) }
     single { PermissionAdapter(get()) }
     single { FileAdapter(get()) }
