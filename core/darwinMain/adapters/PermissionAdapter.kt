@@ -1,5 +1,7 @@
 package app.mehmaan.core.adapters
 
+import platform.Foundation.NSCachesDirectory
+import platform.Foundation.NSFileManager
 import platform.UIKit.UIViewController
 
 
@@ -18,4 +20,8 @@ class DarwinPermissionAdapter(controller: UIViewController) {
         }
         return granted
     }
+}
+
+fun t() {
+    val x = NSCachesDirectory
 }

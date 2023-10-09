@@ -15,6 +15,9 @@ interface AdapterContract<Controller>: Component {
 
 open class Adapter<Controller>(controller: Controller): AdapterContract<Controller> {
     override val ref = WeakRef(controller)
+    val controller: Controller?
+        get() = ref.get()
+
     val scope = CoroutineScope(Dispatchers.Main)
     override fun handle(controller: Controller, event: ControllerEvent) {}
 }
