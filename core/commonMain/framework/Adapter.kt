@@ -15,6 +15,7 @@ interface AdapterContract<Controller>: Component {
 
 open class Adapter<Controller>(controller: Controller): AdapterContract<Controller> {
     override val ref = WeakRef(controller)
+    constructor(controllerRef: WeakRef<Controller>): this(controllerRef.get() ?: throw NullPointerException("Controller is null"))
     val controller: Controller?
         get() = ref.get()
 

@@ -11,6 +11,8 @@ plugins {
     id("com.google.firebase.crashlytics")
     id("com.google.devtools.ksp")
     id("app.cash.sqldelight")
+    id("org.jetbrains.compose")
+
 }
 
 kotlin {
@@ -21,6 +23,11 @@ kotlin {
             commonSerialization()
             commonKoin()
             api("org.jetbrains.kotlinx:kotlinx-io-core:0.3.0")
+            implementation(compose.runtime)
+            implementation(compose.foundation)
+            implementation(compose.material)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            implementation(compose.components.resources)
         }
 
         testDependencies = {

@@ -4,9 +4,9 @@ import android.app.Activity
 import androidx.activity.ComponentActivity
 
 abstract class BaseActivity: ComponentActivity() {
-    val adapters = mutableListOf<Adapter<Activity>>()
+    val adapters = mutableListOf<Adapter<ComponentActivity>>()
 
-    fun connect(adapterList: List<Adapter<Activity>>) {
+    fun connect(adapterList: List<Adapter<ComponentActivity>>) {
         adapters.addAll(adapterList)
         adapterList.forEach(lifecycle::addObserver)
     }
@@ -17,14 +17,14 @@ abstract class BaseActivity: ComponentActivity() {
      * You can add adapters in multiple steps
      * And can also do eager disconnect
      */
-    fun connect(vararg adapters: Adapter<Activity>) = connect(adapters.toList())
+    fun connect(vararg adapters: Adapter<ComponentActivity>) = connect(adapters.toList())
 
-    fun disconnect(adapterList: List<Adapter<Activity>>) {
+    fun disconnect(adapterList: List<Adapter<ComponentActivity>>) {
         this.adapters.removeAll(adapterList)
         adapterList.forEach(lifecycle::removeObserver)
     }
 
-    fun disconnect(vararg adapters: Adapter<Activity>) = disconnect(adapters.toList())
+    fun disconnect(vararg adapters: Adapter<ComponentActivity>) = disconnect(adapters.toList())
 
     override fun onDestroy() {
         super.onDestroy()
