@@ -1,5 +1,6 @@
 package app.mehmaan.core.framework
 
+import androidx.compose.runtime.Composable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 
@@ -21,4 +22,9 @@ open class Adapter<Controller>(controller: Controller): AdapterContract<Controll
 
     val scope = CoroutineScope(Dispatchers.Main)
     override fun handle(controller: Controller, event: ControllerEvent) {}
+}
+
+interface View<Props> {
+    @Composable
+    fun Render(props: Props)
 }

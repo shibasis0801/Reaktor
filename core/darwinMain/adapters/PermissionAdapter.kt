@@ -6,8 +6,6 @@ import platform.AVFoundation.AVMediaType
 import platform.AVFoundation.AVMediaTypeVideo
 import platform.AVFoundation.requestAccessForMediaType
 import platform.Foundation.NSCachesDirectory
-import platform.Foundation.NSFileManager
-import platform.UIKit.UIViewController
 import kotlin.coroutines.resume
 
 
@@ -48,6 +46,21 @@ fun t() {
     val x = NSCachesDirectory
 }
 
+
+interface SyncModule {
+    fun identity(data: String): String
+}
+
+interface AsyncModule {
+    suspend fun identity(data: String): String
+}
+
+interface StreamingModule {
+
+}
+
+
+
 data class RemoteCommand(
     val className: String,
     val methodName: String,
@@ -74,4 +87,6 @@ interface ClientStreamingTransport: Transport {
 interface DuplexStreamingTransport: Transport {
 
 }
+
+
 

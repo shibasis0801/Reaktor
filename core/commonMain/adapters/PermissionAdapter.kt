@@ -1,6 +1,7 @@
 package app.mehmaan.core.adapters
 
 import app.mehmaan.core.framework.Adapter
+import kotlinx.coroutines.flow.Flow
 
 
 sealed class PermissionResult {
@@ -24,4 +25,51 @@ abstract class PermissionAdapter<Controller>(controller: Controller): Adapter<Co
 
     // You can also override this method for more granular permission handling
     suspend fun requestOptional(vararg permissions: String): Map<String, PermissionResult> = hashMapOf()
+}
+
+
+
+// Build BinaryTransport for each platform
+// from JNI expose a ByteBuffer Transport
+// from jsi, expose a ByteBuffer Transport
+// from flutter, expose a ByteBuffer Transport
+// from objc, expose a ByteBuffer Transport
+// from cpp, expose a ByteBuffer Transport
+
+interface SyncModule {
+    fun identity(data: String): String
+}
+
+interface AsyncModule {
+    suspend fun identity(data: String): String
+}
+
+interface StreamingModule {
+    fun identity(data: Flow<String>): Flow<String>
+}
+
+data class RemoteCommand(
+    val className: String,
+    val methodName: String,
+    val payload: ByteArray
+)
+sealed interface Transport
+
+// IPC / HTTP
+interface BlockingTransport: Transport {
+}
+
+// IPC / HTTP
+interface NonBlockingTransport: Transport {
+
+}
+
+// SSE
+interface ClientStreamingTransport: Transport {
+
+}
+
+// WebSockets
+interface DuplexStreamingTransport: Transport {
+
 }
