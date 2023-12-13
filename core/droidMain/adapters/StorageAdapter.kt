@@ -11,6 +11,10 @@ import java.util.*
 class AndroidStorageAdapter(activity: ComponentActivity): StorageAdapter<ComponentActivity>(activity) {
     private val FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
 
+    override fun test(): Int {
+        return 0
+    }
+
     fun getHomeDirectory(directory: String = "Manna"): File? {
         return invoke {
             val mediaDir = externalMediaDirs
