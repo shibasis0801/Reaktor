@@ -18,21 +18,22 @@ class AndroidPermissionAdapter(
     activity: ComponentActivity
 ): PermissionAdapter<ComponentActivity>(activity) {
 
-    fun check(permission: String) = invoke {
-        val actualPermissions = when(permission) {
-            Permission.CAMERA -> listOf(Manifest.permission.CAMERA)
-            else -> listOf(permission)
-        }
-
-        actualPermissions.all { hasPermission(it) }
-    } ?: false
+    private fun convert(permissions: Array<out String>): Array<String> {
+        return permissions.map {
+            when(it) {
+                Permission.CAMERA -> Manifest.permission.CAMERA
+                else -> it
+            }
+        }.toTypedArray()
+    }
 
     override suspend fun request(vararg permissions: String): Boolean {
         val activity = ref.get() ?: return false
-        if (permissions.all(::check)) {
+        val actual = convert(permissions)
+        if (actual.all { activity.hasPermission(it) }) {
             return true
         }
-        val result = activity.getResultFromActivity(ActivityResultContracts.RequestMultiplePermissions(), arrayOf(*permissions))
+        val result = activity.getResultFromActivity(ActivityResultContracts.RequestMultiplePermissions(), actual)
         return result.all { it.value }
     }
 }

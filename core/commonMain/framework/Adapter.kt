@@ -24,7 +24,7 @@ open class Adapter<Controller>(controller: Controller): AdapterContract<Controll
     override fun handle(controller: Controller, event: ControllerEvent) {}
 }
 
-interface View<Props> {
+interface ComposeView {
     @Composable
-    fun Render(props: Props)
+    fun<Props> Render(props: Props)
 }
