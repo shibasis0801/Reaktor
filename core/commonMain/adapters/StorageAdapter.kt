@@ -1,6 +1,7 @@
 package app.mehmaan.core.adapters
 
 import app.mehmaan.core.framework.Adapter
+import dev.shibasis.reaktor.framework.Feature
 
 abstract class StorageAdapter<Controller>(
     controller: Controller
@@ -8,3 +9,8 @@ abstract class StorageAdapter<Controller>(
     abstract fun test(): Int
 //    fun getHomeDirectory(): String = ""
 }
+
+private val storageId = Feature.createId()
+var Feature.Storage: StorageAdapter<*>?
+    get() = fetchModule(storageId)
+    set(storageAdapter) = storeModule(storageId, storageAdapter)

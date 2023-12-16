@@ -10,3 +10,12 @@ actual class WeakRef<T> actual constructor(referred: T) {
         return ref
     }
 }
+
+actual class AtomicInt actual constructor(value: Int){
+    private var data = value
+    actual fun getAndIncrement(): Int {
+        val result = data
+        data += 1
+        return result
+    }
+}

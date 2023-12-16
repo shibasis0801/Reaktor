@@ -1,6 +1,7 @@
 package app.mehmaan.core.adapters
 
 import app.mehmaan.core.framework.Adapter
+import dev.shibasis.reaktor.framework.Feature
 import kotlinx.coroutines.flow.Flow
 
 
@@ -26,3 +27,9 @@ abstract class PermissionAdapter<Controller>(controller: Controller): Adapter<Co
     // You can also override this method for more granular permission handling
     suspend fun requestOptional(vararg permissions: String): Map<String, PermissionResult> = hashMapOf()
 }
+
+
+private val permissionId = Feature.createId()
+var Feature.Permission: PermissionAdapter<*>?
+    get() = fetchModule(permissionId)
+    set(permissionAdapter) = storeModule(permissionId, permissionAdapter)
