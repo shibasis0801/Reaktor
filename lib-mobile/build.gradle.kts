@@ -23,7 +23,6 @@ kotlin {
             implementation(compose.material)
             @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
             implementation(compose.components.resources)
-//            implementation("androidx.compose.material3:material3-icons-extended:1.4.3")
         }
     }
     droid(commonMain) {
@@ -38,9 +37,7 @@ kotlin {
     }
     darwin(commonMain) {
         podDependencies = {
-            framework {
-                isStatic = true
-            }
+
         }
         cinterops = {
             val reaktor by creating {

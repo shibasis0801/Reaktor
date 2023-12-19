@@ -12,5 +12,5 @@ abstract class StorageAdapter<Controller>(
 
 private val storageId = Feature.createId()
 var Feature.Storage: StorageAdapter<*>?
-    get() = fetchModule(storageId)
-    set(storageAdapter) = storeModule(storageId, storageAdapter)
+    get() = fetchDependency(storageId)
+    set(storageAdapter) = storeDependency(storageId, storageAdapter)

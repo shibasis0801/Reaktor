@@ -2,7 +2,6 @@ package app.mehmaan.core.framework
 
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
-import org.koin.core.component.KoinComponent
 import androidx.lifecycle.Lifecycle.Event
 
 /*
@@ -11,7 +10,7 @@ Adapters are connections between Components and Activity framework (Should have 
 (since we don't have a global window like web)
 (This is a SingleActivity Application)
  */
-actual sealed interface ComponentContract: KoinComponent, LifecycleEventObserver {
+actual sealed interface ControllerEventObserver: LifecycleEventObserver {
     actual fun handle(event: ControllerEvent)
     override fun onStateChanged(source: LifecycleOwner, event: Event) {
         handle(when (event) {

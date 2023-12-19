@@ -2,7 +2,6 @@ package app.mehmaan.core.adapters
 
 import app.mehmaan.core.framework.Adapter
 import dev.shibasis.reaktor.framework.Feature
-import kotlinx.coroutines.flow.Flow
 
 
 sealed class PermissionResult {
@@ -18,6 +17,7 @@ object Permission {
     val CAMERA = "CAMERA"
     val LOCATION = "LOCATION"
     val STORAGE = "STORAGE"
+    val GALLERY = "GALLERY"
 }
 
 abstract class PermissionAdapter<Controller>(controller: Controller): Adapter<Controller>(controller) {
@@ -31,5 +31,5 @@ abstract class PermissionAdapter<Controller>(controller: Controller): Adapter<Co
 
 private val permissionId = Feature.createId()
 var Feature.Permission: PermissionAdapter<*>?
-    get() = fetchModule(permissionId)
-    set(permissionAdapter) = storeModule(permissionId, permissionAdapter)
+    get() = fetchDependency(permissionId)
+    set(permissionAdapter) = storeDependency(permissionId, permissionAdapter)

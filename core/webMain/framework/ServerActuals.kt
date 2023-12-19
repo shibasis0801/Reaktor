@@ -1,5 +1,8 @@
 package app.mehmaan.core.framework
 
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.toComposeImageBitmap
+import org.jetbrains.skia.Image
 
 actual val __PLATFORM = PlatformType.JS
 
@@ -19,3 +22,10 @@ actual class AtomicInt actual constructor(value: Int){
         return result
     }
 }
+
+
+// Needs to be removed
+actual fun ByteArray.toImageBitmap(): ImageBitmap {
+    return Image.makeFromEncoded(this).toComposeImageBitmap()
+}
+

@@ -1,11 +1,13 @@
 package app.mehmaan.core.adapters
 
 import kotlinx.coroutines.suspendCancellableCoroutine
+import platform.AVFoundation.AVAuthorizationStatusAuthorized
 import platform.AVFoundation.AVCaptureDevice
-import platform.AVFoundation.AVMediaType
 import platform.AVFoundation.AVMediaTypeVideo
+import platform.AVFoundation.authorizationStatusForMediaType
 import platform.AVFoundation.requestAccessForMediaType
-import platform.Foundation.NSCachesDirectory
+import platform.Photos.PHAuthorizationStatusAuthorized
+import platform.Photos.PHPhotoLibrary
 import kotlin.coroutines.resume
 
 
@@ -16,6 +18,7 @@ class DarwinPermissionAdapter(): PermissionAdapter<Unit>(Unit) {
 
     init {
         addHandler(Permission.CAMERA, ::cameraPermissionHandler)
+        addHandler(Permission.GALLERY, ::galleryPermissionHandler)
     }
 
     fun addHandler(permission: String, handler: PermissionRequestHandler) {
@@ -32,7 +35,12 @@ class DarwinPermissionAdapter(): PermissionAdapter<Unit>(Unit) {
 }
 
 suspend fun cameraPermissionHandler() = suspendCancellableCoroutine { continuation ->
-    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) {
+    val mediaType = AVMediaTypeVideo
+
+    // This does not work
+//    val status = AVCaptureDevice.authorizationStatusForMediaType(mediaType)
+//    if (status == AVAuthorizationStatusAuthorized) PermissionResult.Granted
+    AVCaptureDevice.requestAccessForMediaType(mediaType) {
         if (it) {
             continuation.resume(PermissionResult.Granted)
         }
@@ -40,4 +48,18 @@ suspend fun cameraPermissionHandler() = suspendCancellableCoroutine { continuati
             continuation.resume(PermissionResult.Denied.Once)
         }
     }
+}
+
+
+suspend fun galleryPermissionHandler() = suspendCancellableCoroutine { continuation ->
+    if (PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatusAuthorized) PermissionResult.Granted
+    else PHPhotoLibrary.requestAuthorization {
+        if (it == PHAuthorizationStatusAuthorized) {
+            continuation.resume(PermissionResult.Granted)
+        }
+        else {
+            continuation.resume(PermissionResult.Denied.Once)
+        }
+    }
+
 }

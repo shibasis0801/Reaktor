@@ -8,8 +8,19 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Some description for the Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/lib_mobile.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '11'
+    spec.ios.deployment_target = '12'
                 
+                
+    if !Dir.exist?('build/cocoapods/framework/lib_mobile.framework') || Dir.empty?('build/cocoapods/framework/lib_mobile.framework')
+        raise "
+
+        Kotlin framework 'lib_mobile' doesn't exist yet, so a proper Xcode project can't be generated.
+        'pod install' should be executed after running ':generateDummyFramework' Gradle task:
+
+            ./gradlew :lib-mobile:generateDummyFramework
+
+        Alternatively, proper pod installation is performed during Gradle sync in the IDE (if Podfile location is set)"
+    end
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':lib-mobile',

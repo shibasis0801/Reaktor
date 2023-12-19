@@ -1,5 +1,8 @@
 package app.mehmaan.core.framework
 
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.toComposeImageBitmap
+import org.jetbrains.skia.Image
 import kotlin.concurrent.AtomicInt
 import kotlin.experimental.ExperimentalNativeApi
 import kotlin.native.ref.WeakReference
@@ -18,3 +21,8 @@ actual class AtomicInt actual constructor(value: Int){
     private val data = AtomicInt(value)
     actual fun getAndIncrement() = data.getAndIncrement()
 }
+
+actual fun ByteArray.toImageBitmap(): ImageBitmap {
+    return Image.makeFromEncoded(this).toComposeImageBitmap()
+}
+

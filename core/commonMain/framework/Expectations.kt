@@ -1,5 +1,7 @@
 package app.mehmaan.core.framework
 
+import androidx.compose.ui.graphics.ImageBitmap
+
 expect class WeakRef<T>(referred: T) {
     fun get(): T?
 }
@@ -8,3 +10,8 @@ expect class WeakRef<T>(referred: T) {
 expect class AtomicInt(value: Int) {
     fun getAndIncrement(): Int
 }
+
+expect fun ByteArray.toImageBitmap(): ImageBitmap
+
+
+

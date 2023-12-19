@@ -1,7 +1,8 @@
 package app.mehmaan.mobile.jsi
 
-import concurrency.Dispatch
+import framework.Async
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -11,7 +12,7 @@ actual class FlowHandle actual constructor(
 ) {
     var resolver: SingleArgNativeFunction? = null
 
-    private val scope = CoroutineScope(Dispatch.Background)
+    private val scope = CoroutineScope(Dispatchers.Async)
     private val flowJob: Job = scope.launch {
         // we can replay if needed
         flow.collect {

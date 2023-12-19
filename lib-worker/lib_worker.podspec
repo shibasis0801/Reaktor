@@ -8,8 +8,19 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Some description for the Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/lib_worker.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '11'
+    spec.ios.deployment_target = '12'
                 
+                
+    if !Dir.exist?('build/cocoapods/framework/lib_worker.framework') || Dir.empty?('build/cocoapods/framework/lib_worker.framework')
+        raise "
+
+        Kotlin framework 'lib_worker' doesn't exist yet, so a proper Xcode project can't be generated.
+        'pod install' should be executed after running ':generateDummyFramework' Gradle task:
+
+            ./gradlew :lib-worker:generateDummyFramework
+
+        Alternatively, proper pod installation is performed during Gradle sync in the IDE (if Podfile location is set)"
+    end
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':lib-worker',

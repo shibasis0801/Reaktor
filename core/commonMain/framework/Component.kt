@@ -1,16 +1,16 @@
 package app.mehmaan.core.framework
 
-import org.koin.core.component.KoinComponent
 
 /*
 A component receives events from Controllers (activity, application, viewcontroller, window, etc)
 It is sealed so that you don't subclass it (visibility modifiers weren't working)
 You should always inherit Component instead of ComponentContract
+Without componentContract you would have to mandatorily implement handle function
 */
-expect sealed interface ComponentContract: KoinComponent {
+expect sealed interface ControllerEventObserver {
     fun handle(event: ControllerEvent)
 }
 
-interface Component: ComponentContract {
+interface Component: ControllerEventObserver {
     override fun handle(event: ControllerEvent) {}
 }

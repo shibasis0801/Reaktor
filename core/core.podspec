@@ -8,8 +8,19 @@ Pod::Spec.new do |spec|
     spec.summary                  = 'Some description for the Shared Module'
     spec.vendored_frameworks      = 'build/cocoapods/framework/core.framework'
     spec.libraries                = 'c++'
-    spec.ios.deployment_target = '11'
+    spec.ios.deployment_target = '12'
                 
+                
+    if !Dir.exist?('build/cocoapods/framework/core.framework') || Dir.empty?('build/cocoapods/framework/core.framework')
+        raise "
+
+        Kotlin framework 'core' doesn't exist yet, so a proper Xcode project can't be generated.
+        'pod install' should be executed after running ':generateDummyFramework' Gradle task:
+
+            ./gradlew :core:generateDummyFramework
+
+        Alternatively, proper pod installation is performed during Gradle sync in the IDE (if Podfile location is set)"
+    end
                 
     spec.pod_target_xcconfig = {
         'KOTLIN_PROJECT_PATH' => ':core',

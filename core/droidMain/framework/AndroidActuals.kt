@@ -1,7 +1,10 @@
 package app.mehmaan.core.framework
 
+import android.graphics.BitmapFactory
 import java.lang.ref.WeakReference
 import java.util.concurrent.atomic.AtomicInteger
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 
 // replace this from pragati
 actual val __PLATFORM = PlatformType.ANDROID
@@ -15,3 +18,8 @@ actual class AtomicInt actual constructor(value: Int){
     private val data = AtomicInteger(value)
     actual fun getAndIncrement() = data.getAndIncrement()
 }
+
+actual fun ByteArray.toImageBitmap(): ImageBitmap {
+    return BitmapFactory.decodeByteArray(this, 0, size).asImageBitmap()
+}
+
