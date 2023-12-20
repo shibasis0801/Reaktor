@@ -4,7 +4,7 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.toComposeImageBitmap
 import org.jetbrains.skia.Image
 
-actual val __PLATFORM = PlatformType.JS
+actual val __PLATFORM = PlatformType.WEB
 
 // noop
 actual class WeakRef<T> actual constructor(referred: T) {

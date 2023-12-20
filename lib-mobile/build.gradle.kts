@@ -17,12 +17,6 @@ kotlin {
             api(project(":core"))
             api(project(":lib-navigation"))
             api(project(":lib-auth"))
-            basic()
-            implementation(compose.runtime)
-            implementation(compose.foundation)
-            implementation(compose.material)
-            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-            implementation(compose.components.resources)
         }
     }
     droid(commonMain) {

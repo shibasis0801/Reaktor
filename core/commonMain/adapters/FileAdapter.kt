@@ -1,8 +1,12 @@
-package adapters
+package app.mehmaan.core.adapters
 
 import app.mehmaan.core.framework.Adapter
 import dev.shibasis.reaktor.framework.Feature
+import kotlinx.io.buffered
 import kotlinx.io.files.FileSystem
+import kotlinx.io.files.Path
+import kotlinx.io.files.SystemFileSystem
+import kotlinx.io.readByteArray
 
 /*
 https://chat.openai.com/c/10795b61-e0ea-4e17-afdf-10f4079ac440
@@ -64,10 +68,23 @@ iCloud Backup: Certain iOS directories (like Documents) are backed up to iCloud 
  */
 
 
-
 abstract class FileAdapter<Controller>(controller: Controller): Adapter<Controller>(controller) {
-    fun storeFile() {
+    abstract fun getCacheDirectory(): String
 
+    fun writeBinaryFile(path: String, data: ByteArray) {
+        val bufferedSink = SystemFileSystem.sink(Path(path)).buffered()
+        bufferedSink.write(data)
+        bufferedSink.close()
+    }
+
+    fun readBinaryFile(path: String): ByteArray? {
+        val actualPath = Path(path)
+        if (!SystemFileSystem.exists(actualPath)) return null
+
+        val bufferedSource = SystemFileSystem.source(actualPath).buffered()
+        val data = bufferedSource.readByteArray()
+        bufferedSource.close()
+        return data
     }
 }
 

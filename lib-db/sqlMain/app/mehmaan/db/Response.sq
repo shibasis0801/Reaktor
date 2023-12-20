@@ -1,0 +1,24 @@
+CREATE TABLE NetworkCache (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  url TEXT NOT NULL,
+  response TEXT NOT NULL,
+  headers TEXT,
+  timestamp INTEGER NOT NULL
+);
+
+insertResponse:
+INSERT INTO NetworkCache (url, response, headers, timestamp)
+VALUES (?, ?, ?, ?);
+
+queryResponseByUrl:
+SELECT response FROM NetworkCache
+WHERE url = ?;
+
+deleteResponseByUrl:
+DELETE FROM NetworkCache
+WHERE url = ?;
+
+updateResponse:
+UPDATE NetworkCache
+SET response = ?, headers = ?, timestamp = ?
+WHERE url = ?;
