@@ -20,6 +20,11 @@ abstract class Database<Controller>(
 ): Adapter<Controller>(controller) {
     abstract suspend fun getDriver(schema: SqlSchema<QueryResult.AsyncValue<Unit>>): SqlDriver
     suspend fun getDb() = NetworkDatabase(getDriver(NetworkDatabase.Schema))
+
+    suspend fun test() {
+        val x = getDb()
+        x.responseQueries
+    }
 }
 
 private val databaseId = Feature.createId()

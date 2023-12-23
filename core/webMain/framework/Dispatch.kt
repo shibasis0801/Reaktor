@@ -1,4 +1,5 @@
-package framework
+package app.mehmaan.core.framework
+
 
 import kotlinx.coroutines.Dispatchers
 

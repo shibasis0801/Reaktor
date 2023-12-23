@@ -15,8 +15,6 @@ kotlin {
     val (commonMain, commonTest) = common {
         dependencies = {
             api(project(":core"))
-            api(project(":lib-navigation"))
-            api(project(":lib-auth"))
         }
     }
     droid(commonMain) {
@@ -31,7 +29,10 @@ kotlin {
     }
     darwin(commonMain) {
         podDependencies = {
-
+//            pod("FirebaseAnalytics", "10.19.0")
+//            pod("FirebaseCore", "10.19.0")
+//            pod("FirebaseCrashlytics", "10.19.0")
+//            pod("FirebaseMessaging", "10.19.0")
         }
         cinterops = {
             val reaktor by creating {

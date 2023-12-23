@@ -20,7 +20,5 @@ abstract class WorkScheduler<Controller>(controller: Controller): Adapter<Contro
     interface ScheduleOneTimeWork {
         fun schedule()
     }
-
-
 }
 

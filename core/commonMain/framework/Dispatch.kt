@@ -1,4 +1,4 @@
-package framework
+package app.mehmaan.core.framework
 
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.CoroutineScope

@@ -8,12 +8,23 @@ import dev.shibasis.dependeasy.*
 plugins {
     id("com.android.library")
     id("dev.shibasis.dependeasy.plugin")
+    id("org.jetbrains.compose")
 }
 
 kotlin {
     val (commonMain, commonTest) = common {
         dependencies = {
             api(project(":core"))
+            api(compose.runtime)
+            api(compose.foundation)
+            api(compose.material)
+            api(compose.material3)
+            api(compose.ui)
+            api(compose.materialIconsExtended)
+            @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
+            api(compose.components.resources)
+            // Needs upgrade for wasm
+            api("dev.chrisbanes.material3:material3-window-size-class-multiplatform:0.3.1")
         }
     }
 
@@ -25,7 +36,7 @@ kotlin {
 
     droid(commonMain) {
         dependencies = {
-            workManager()
+
         }
     }
 
@@ -37,5 +48,5 @@ kotlin {
 }
 
 android {
-    defaults("app.mehmaan.worker")
+    defaults("app.mehmaan.ui")
 }

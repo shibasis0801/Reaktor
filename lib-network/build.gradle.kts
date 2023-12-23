@@ -16,26 +16,33 @@ kotlin {
             api(project(":core"))
         }
     }
-
+    
     web(commonMain) {
         dependencies = {
 
         }
     }
-
+    
     droid(commonMain) {
         dependencies = {
-            workManager()
+
         }
     }
-
+    
     darwin(commonMain) {
         dependencies = {
 
         }
     }
+    
+    server(commonMain) {
+        dependencies = {
+
+        }
+    }
+    
 }
 
 android {
-    defaults("app.mehmaan.worker")
+    defaults("app.mehmaan.network")
 }

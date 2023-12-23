@@ -33,14 +33,9 @@ class DarwinPermissionAdapter(): PermissionAdapter<Unit>(Unit) {
         return granted
     }
 }
-
+// todo suspendcancellablecoroutine needs a timeout feature
 suspend fun cameraPermissionHandler() = suspendCancellableCoroutine { continuation ->
-    val mediaType = AVMediaTypeVideo
-
-    // This does not work
-//    val status = AVCaptureDevice.authorizationStatusForMediaType(mediaType)
-//    if (status == AVAuthorizationStatusAuthorized) PermissionResult.Granted
-    AVCaptureDevice.requestAccessForMediaType(mediaType) {
+    AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo) {
         if (it) {
             continuation.resume(PermissionResult.Granted)
         }
@@ -52,8 +47,7 @@ suspend fun cameraPermissionHandler() = suspendCancellableCoroutine { continuati
 
 
 suspend fun galleryPermissionHandler() = suspendCancellableCoroutine { continuation ->
-    if (PHPhotoLibrary.authorizationStatus() == PHAuthorizationStatusAuthorized) PermissionResult.Granted
-    else PHPhotoLibrary.requestAuthorization {
+    PHPhotoLibrary.requestAuthorization {
         if (it == PHAuthorizationStatusAuthorized) {
             continuation.resume(PermissionResult.Granted)
         }
@@ -61,5 +55,4 @@ suspend fun galleryPermissionHandler() = suspendCancellableCoroutine { continuat
             continuation.resume(PermissionResult.Denied.Once)
         }
     }
-
 }
