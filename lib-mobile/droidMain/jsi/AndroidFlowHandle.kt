@@ -1,6 +1,6 @@
 package app.mehmaan.mobile.jsi
 
-import framework.Async
+import app.mehmaan.core.framework.Async
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
